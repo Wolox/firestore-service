@@ -1,0 +1,19 @@
+{
+  "name": "firestore-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wolox/firestore-service.git"
+  },
+  "author": "Lucas Zibell <lucas.zibell@wolox.com.ar>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wolox/firestore-service/issues"
+  },
+  "homepage": "https://github.com/Wolox/firestore-service#readme"
+}
