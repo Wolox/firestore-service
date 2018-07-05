@@ -43,16 +43,14 @@ function initializeFirestore(keys) {
 
 async function getData({ pathname, query }) {
   try {
-    const data = await (query.id
-      ? firestore
-          .collection(pathname)
+    let data = firestore.collection(pathname);
+    data = await (query.id
+      ? data
           .doc(query.id)
           .get()
-          .then(item => ({ key: item.id, ...item.data() }))
-      : firestore
-          .collection(pathname)
-          .get()
-          .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
+          .then(item => ({ id: item.id, ...item.data() }))
+      : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
+
     return generateResponse(data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
     return generateResponse(STATUS.FAILURE, error, CLIENT_ERROR_CODES.BAD_REQUEST, REQUEST.GET);
@@ -93,7 +91,7 @@ async function deleteDoc({ pathname, query }) {
   }
 }
 
-exports.firestoreService {
+const firestoreService = {
   INITIALIZE: keys => initializeFirestore(keys),
   GET: path => getData(url.parse(path, true)),
   POST: path => postData(url.parse(path, true)),
@@ -101,4 +99,4 @@ exports.firestoreService {
   CREATE: (path, body) => createDoc(url.parse(path, true), body)
 };
 
-// export default firestoreService;
+export default firestoreService;
