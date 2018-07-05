@@ -1,13 +1,15 @@
 import firestoreService from './index';
 
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-//   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-//   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-//   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
-// };
+require('dotenv').config();
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+};
 
 firestoreService.INITIALIZE(firebaseConfig);
 
@@ -57,13 +59,13 @@ test('Get Users', async () => {
 //   const body = { firstName: 'Test', lastName: 'Delete', dni: '22' };
 //   const response = await firestoreService.CREATE(path, body);
 //   const newUser = await firestoreService.GET(`path?id=${response.data}`);
+//   await firestoreService.DELETE(`path?id=${response.data}`);
 //   expect(response).toEqual({
 //     data: newUser.data.id,
 //     request: 'CREATE',
 //     status: 201,
 //     statusText: 'OK'
 //   });
-//   await firestoreService.DELETE(`path?id=${response.data}`);
 // });
 
 // test('Delete User', async () => {
