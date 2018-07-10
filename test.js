@@ -11,41 +11,50 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
 };
 
-firestoreService.INITIALIZE(firebaseConfig);
+test('Initialize Firestore Service', async () => {
+  const response = await firestoreService.INITIALIZE(firebaseConfig);
+  expect(response).toEqual(
+    expect.objectContaining({
+      request: 'INITIALIZE',
+      status: 200,
+      statusText: 'OK'
+    })
+  );
+});
 
-test('get user w7YD8WslxITuRjOa8HCl', async () => {
-  const path = 'users?id=w7YD8WslxITuRjOa8HCl';
+test('Get user J8NR45UzDffyMY0wBNoa', async () => {
+  const path = 'tests/get/users?id=J8NR45UzDffyMY0wBNoa';
   const response = await firestoreService.GET(path);
   expect(response).toEqual({
-    data: { dni: 39568741, firstName: 'Juan', id: 'w7YD8WslxITuRjOa8HCl', lastName: 'Perez' },
+    data: { age: 33, firstName: 'Mike', id: 'J8NR45UzDffyMY0wBNoa', lastName: 'Poe' },
     request: 'GET',
     status: 200,
     statusText: 'OK'
   });
 });
 
-test('Get Users', async () => {
-  const path = 'users';
+test('Get All Users', async () => {
+  const path = 'tests/get/users';
   const response = await firestoreService.GET(path);
   expect(response).toEqual({
     data: [
       {
-        dni: 39852456,
-        firstName: 'Tomas',
-        id: 'eT35RtaGC3OOKvfzxDjs',
-        lastName: 'Moreno'
+        age: 22,
+        firstName: 'Matt',
+        id: 'EFUsC6gMx052i39GFz8a',
+        lastName: 'Myers'
       },
       {
-        dni: 38741963,
-        firstName: 'Ignacio',
-        id: 'jApqztuVxy1SmF8Os02W',
-        lastName: 'Molina'
+        age: 33,
+        firstName: 'Mike',
+        id: 'J8NR45UzDffyMY0wBNoa',
+        lastName: 'Poe'
       },
       {
-        dni: 39568741,
-        firstName: 'Juan',
-        id: 'w7YD8WslxITuRjOa8HCl',
-        lastName: 'Perez'
+        age: 20,
+        firstName: 'May',
+        id: 'q5LpatgtZwj2U2OalZKR',
+        lastName: 'June'
       }
     ],
     request: 'GET',
@@ -54,29 +63,42 @@ test('Get Users', async () => {
   });
 });
 
-// test('Create User', async () => {
-//   const path = 'users';
-//   const body = { firstName: 'Test', lastName: 'Delete', dni: '22' };
-//   const response = await firestoreService.CREATE(path, body);
-//   const newUser = await firestoreService.GET(`path?id=${response.data}`);
-//   await firestoreService.DELETE(`path?id=${response.data}`);
-//   expect(response).toEqual({
-//     data: newUser.data.id,
-//     request: 'CREATE',
-//     status: 201,
-//     statusText: 'OK'
-//   });
-// });
+test('Create Doc', async () => {
+  const path = 'tests/create/animals';
+  const body = { name: 'Bob the test Bear', specimen: 'Bear' };
+  const response = await firestoreService.CREATE(path, body);
+  const newUser = await firestoreService.GET(`tests/create/animals?id=${response.data}`);
+  expect(response).toEqual({
+    data: newUser.data.id,
+    request: 'CREATE',
+    status: 201,
+    statusText: 'OK'
+  });
+});
 
-// test('Delete User', async () => {
-//   const path = 'users';
-//   const body = { firstName: 'Test', lastName: 'Delete', dni: '22' };
-//   await firestoreService.CREATE(path, body);
-//   const response = await firestoreService.DELETE(`path?id=${response.data}`);
-//   expect(response).toEqual({
-//     data: unde,
-//     request: 'CREATE',
-//     status: 201,
-//     statusText: 'OK'
-//   });
-// });
+test('Delete Doc', async () => {
+  const path = 'tests/create/animals';
+  const body = { firstName: 'Test', lastName: 'Delete' };
+  const response = await firestoreService.CREATE(path, body);
+  const deleteResponse = await firestoreService.DELETE(`tests/create/animals?id=${response.data}`);
+  expect(deleteResponse).toEqual({
+    request: 'DELETE',
+    status: 200,
+    statusText: 'OK'
+  });
+});
+
+test('Modify Doc', async () => {
+  const path = 'tests/create/animals';
+  const body = { specimen: 'unkown', name: 'None' };
+  const newBody = { specimen: 'Shark', name: 'Little Shark' };
+  const response = await firestoreService.CREATE(path, body);
+  await firestoreService.POST(`tests/create/animals?id=${response.data}`, newBody);
+  const modified = await firestoreService.GET(`tests/create/animals?id=${response.data}`);
+  expect(modified).toEqual({
+    data: { ...newBody, id: response.data },
+    request: 'GET',
+    status: 200,
+    statusText: 'OK'
+  });
+});

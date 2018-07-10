@@ -24,6 +24,7 @@ const CLIENT_ERROR_CODES = {
 };
 
 const REQUEST = {
+  INITIALIZE: 'INITIALIZE',
   CREATE: 'CREATE',
   GET: 'GET',
   POST: 'POST',
@@ -38,7 +39,12 @@ const generateResponse = (data, status, statusText, request) => ({
 });
 
 function initializeFirestore(keys) {
-  firestore = firebase.initializeApp(keys).firestore();
+  try {
+    firestore = firebase.initializeApp(keys).firestore();
+    return generateResponse(firestore, SUCCESS_CODES.OK, STATUS.OK, REQUEST.INITIALIZE);
+  } catch (error) {
+    return generateResponse(error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.INITIALIZE);
+  }
 }
 
 async function getData({ pathname, query }) {
@@ -53,7 +59,7 @@ async function getData({ pathname, query }) {
 
     return generateResponse(data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
-    return generateResponse(STATUS.FAILURE, error, CLIENT_ERROR_CODES.BAD_REQUEST, REQUEST.GET);
+    return generateResponse(error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.GET);
   }
 }
 
@@ -65,38 +71,41 @@ async function createDoc({ pathname }, body) {
       .then(ref => ref.id);
     return generateResponse(data, SUCCESS_CODES.CREATED, STATUS.OK, REQUEST.CREATE);
   } catch (error) {
-    return generateResponse(STATUS.FAILURE, error, CLIENT_ERROR_CODES.BAD_REQUEST, REQUEST.CREATE);
+    return generateResponse(error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.CREATE);
   }
 }
 
-async function postData({ pathname }) {
+async function postData({ pathname, query }, body) {
   try {
-    return firestore
+    const response = await firestore
       .collection(pathname)
-      .doc()
-      .set();
+      .doc(query.id)
+      .set(body);
+    return generateResponse(response, SUCCESS_CODES.OK, STATUS.OK, REQUEST.POST);
   } catch (error) {
-    return error;
+    return generateResponse(error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.POST);
   }
 }
 
 async function deleteDoc({ pathname, query }) {
   try {
-    return firestore
+    const data = await firestore
       .collection(pathname)
       .doc(query.id)
       .delete();
+    return generateResponse(data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.DELETE);
   } catch (error) {
-    return error;
+    return generateResponse(error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.DELETE);
   }
 }
 
 const firestoreService = {
   INITIALIZE: keys => initializeFirestore(keys),
   GET: path => getData(url.parse(path, true)),
-  POST: path => postData(url.parse(path, true)),
+  POST: (path, body) => postData(url.parse(path, true), body),
   DELETE: path => deleteDoc(url.parse(path, true)),
-  CREATE: (path, body) => createDoc(url.parse(path, true), body)
+  CREATE: (path, body) => createDoc(url.parse(path, true), body),
+  PATCH: (path, body) => postData(url.parse(path, true), body)
 };
 
 export default firestoreService;
