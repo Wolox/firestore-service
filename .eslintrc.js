@@ -22,10 +22,7 @@ module.exports = {
   "extends": [
     "eslint:recommended",
     "airbnb",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react"
+    "prettier"
   ],
   "globals": {
     "__DEV__": true,
