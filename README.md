@@ -137,7 +137,7 @@ const body = {
 firestoreService.PATCH(path, body)
 ```
 
-# Status Codes
+### Status Codes
 
 ```
 OK: 200
