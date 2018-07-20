@@ -44,7 +44,7 @@ firestoreService.INITIALIZE(firebaseConfig);
 
 For all the examples we will be using the following database.
 
-# RESPONSE
+### RESPONSE
 
 All the http methods will return a response with the following body.
 
@@ -58,7 +58,7 @@ All the http methods will return a response with the following body.
 }
 ```
 
-#GET
+### GET
 
 You can get all the elements from a collection by using get with the path towards the collection.
 
@@ -82,7 +82,7 @@ const response = await firestoreService.GET(path);
 In the response there will be all the attributes of the NA document.
 
 
-#POST
+### POST
 
 You can update an element by calling POST with the path towards the collection, the id of the item to update and the body.
 
@@ -97,7 +97,7 @@ const body = {
 firestoreService.POST(path, body)
 ```
 
-#DELETE
+### DELETE
 
 You can delete a certain item from a collection by using DELETE with a path and an id as queryparam.
 
@@ -110,7 +110,7 @@ firestoreService.DELETE(path)
 The user from the NA region with the id 123 will be deleted.
 
 
-#CREATE
+### CREATE
 
 You can create a new element on a collection by using CREATE and the path towards the desire collection.
 
@@ -122,7 +122,7 @@ const response = await firestoreService.CREATE(path)
 
 In the response there will be the id to the created document.
 
-#PATCH
+### PATCH
 
 You can update an element by calling POST with the path towards the collection, the id of the item to update and the body.
 
