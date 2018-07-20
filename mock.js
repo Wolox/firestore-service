@@ -8,6 +8,7 @@ export default {
     path: 'tests/get/users?id=J8NR45UzDffyMY0wBNoa',
     response: {
       data: { age: 33, firstName: 'Mike', id: 'J8NR45UzDffyMY0wBNoa', lastName: 'Poe' },
+      ok: true,
       request: 'GET',
       status: 200,
       statusText: 'OK'
@@ -36,6 +37,7 @@ export default {
           lastName: 'June'
         }
       ],
+      ok: true,
       request: 'GET',
       status: 200,
       statusText: 'OK'
@@ -45,6 +47,7 @@ export default {
     path: 'tests/create/animals',
     body: { name: 'Bob the test Bear', specimen: 'Bear' },
     response: {
+      ok: true,
       request: 'CREATE',
       status: 201,
       statusText: 'OK'
@@ -54,6 +57,7 @@ export default {
     path: 'tests/create/animals',
     body: { firstName: 'Test', lastName: 'Delete' },
     response: {
+      ok: true,
       request: 'DELETE',
       status: 200,
       statusText: 'OK'
@@ -64,6 +68,7 @@ export default {
     body: { specimen: 'unkown', name: 'None' },
     newBody: { specimen: 'Shark', name: 'Little Shark' },
     response: {
+      ok: true,
       request: 'GET',
       status: 200,
       statusText: 'OK'

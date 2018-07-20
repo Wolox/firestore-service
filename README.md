@@ -1,4 +1,3 @@
-
 # Firestore Service
 
 Create simple firestore queries using http request.
@@ -44,6 +43,20 @@ firestoreService.INITIALIZE(firebaseConfig);
 ## HTTP Methods
 
 For all the examples we will be using the following database.
+
+# RESPONSE
+
+All the http methods will return a response with the following body.
+
+```
+{
+  ok: a boolean -> true: Success, false: Failure
+  data: The data you requested,
+  status: An http Code see the code table below,
+  statusText: 'OK' or 'Failure',
+  request: the actual request (GET, POST, etc.)
+}
+```
 
 #GET
 
@@ -111,32 +124,32 @@ In the response there will be the id to the created document.
 
 #PATCH
 
+You can update an element by calling POST with the path towards the collection, the id of the item to update and the body.
+
 ```
-const path = ''
+const path = 'regions/NA/users?id=123'
 
-firestoreService.PATCH(path)
+const body = {
+  name: 'New Name'
+  surname: 'New Surname'
+};
+
+firestoreService.PATCH(path, body)
 ```
 
-## Contributing
+# Status Codes
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+```
+OK: 200
+CREATED: 201
+NO_CONTENT: 204
+BAD_REQUEST: 400
+UNAUTHORIZED: 401
+FORBIDDEN: 403
+NOT_FOUND: 404
+CONFLICT: 409
+```
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
