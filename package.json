@@ -4,7 +4,8 @@
   "description": "Create firestore queries with simple HTTP methods",
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
-    "build": "webpack"
+    "build": "webpack",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,6 @@
   },
   "homepage": "https://github.com/Wolox/firestore-service#readme",
   "dependencies": {
-    "eslint": "^5.0.1",
-    "eslint-plugin-jest": "^21.17.0",
     "firebase": "^5.2.0"
   },
   "devDependencies": {
@@ -27,14 +26,18 @@
     "babel-jest": "^23.2.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^0.1.19",
     "dotenv": "^6.0.0",
+    "eslint": "^5.0.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.1",
     "jest": "^23.2.0",
     "prettier": "^1.13.7",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.15.0",
     "webpack-cli": "^3.0.8"
   },
