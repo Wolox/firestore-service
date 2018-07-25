@@ -14,7 +14,8 @@ npm install firestore-service
 
 You will need to create a firestore data base. You can do it right here https://console.firebase.google.com/
 
-Afterwards you will need to get the credentials for your db. Yo can get those on `Project Overview -> Add firebase to your web app`
+Afterwards you will need to get the credentials for your db. You can get those on 
+`Project Overview -> Add firebase to your web app`
 
 Note: We strongly recommend to save the credentials on a .env file and not upload them to any repository. With these credentials anyone can access your cloud db.
 
