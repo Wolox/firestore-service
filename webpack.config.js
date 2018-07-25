@@ -13,6 +13,7 @@ module.exports = {
     library: 'firestore-service',
     libraryTarget: 'umd'
   },
+  mode: 'production',
   resolve: {
     extensions: ['js'],
     modules: ['node_modules']
@@ -21,12 +22,13 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader'
       }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['lib'])
+    new CleanWebpackPlugin(['dist'])
   ],
   optimization: {
     minimizer: [

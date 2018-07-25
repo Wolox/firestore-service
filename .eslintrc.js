@@ -14,7 +14,6 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react",
     "prettier",
     "flowtype",
     "jest"
@@ -33,9 +32,6 @@ module.exports = {
     "no-return-assign": "off",
     "no-param-reassign": "off",
     "no-nested-ternary": "off",
-    "react/require-default-props": "off",
-    "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
-    "react/prop-types": [2, { ignore: ["style", "children", "dispatch"] } ],
     "import/order": ["error", {"newlines-between": "always"}],
     "import/prefer-default-export": "off",
     "import/no-unresolved": "error",
