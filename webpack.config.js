@@ -15,7 +15,7 @@ module.exports = {
   },
   mode: 'production',
   resolve: {
-    extensions: ['js'],
+    extensions: ['.js'],
     modules: ['node_modules']
   },
   module: {

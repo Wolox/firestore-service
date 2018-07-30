@@ -21,10 +21,13 @@
     "firebase": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/plugin-transform-spread": "^7.0.0-beta.55",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.5",
     "babel-jest": "^23.2.0",
-    "babel-loader": "^7.1.4",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "dotenv": "^6.0.0",
@@ -39,7 +42,7 @@
     "jest": "^23.2.0",
     "prettier": "^1.13.7",
     "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^4.15.0",
+    "webpack": "^4.16.3",
     "webpack-cli": "^3.0.8"
   },
   "env": {
