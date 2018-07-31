@@ -49,6 +49,7 @@
     "jest/globals": true
   },
   "jest": {
+    "testURL": "http://localhost/",
     "moduleFileExtensions": [
       "js"
     ],
