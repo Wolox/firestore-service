@@ -29,6 +29,7 @@
     "babel-loader": "^7.1.5",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "dotenv": "^6.0.0",
@@ -43,6 +44,7 @@
     "jest": "^23.2.0",
     "module-resolver": "^1.0.0",
     "prettier": "^1.13.7",
+    "transform-runtime": "0.0.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.0.8"

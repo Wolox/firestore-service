@@ -6,6 +6,13 @@
       {
         "root": ["./src"]
       }
+    ],
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
     ]
   ],
   "presets": [

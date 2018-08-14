@@ -6,9 +6,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: './index.js',
+  entry: './firestore-service.js',
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/'),
     filename: 'index.js',
     library: 'firestore-service',
     libraryTarget: 'umd'
@@ -28,7 +28,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin()
   ],
   optimization: {
     minimizer: [
