@@ -1,6 +1,6 @@
 {
   "name": "firestore-service",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Create firestore queries with simple HTTP methods",
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
