@@ -1,16 +1,18 @@
 {
+  "plugins": [
+    "transform-object-rest-spread",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ]
+  ],
   "presets": [
     ["env", {
       "targets": {
         "browsers": ["last 2 versions", "safari >= 7"]
       }
-    },
-    "react",
-    "es2015",
-    "stage-0"
-    ]
-  ],
-  "plugins": [
-    "transform-object-rest-spread"
+    }]
   ]
 }
