@@ -74,7 +74,7 @@ const response = await firestoreService.GET(path);
 
 In the response there will be all the regions
 
-```javascript
+```js
 const path = 'regions?id=NA'
 
 const response = await firestoreService.GET(path);
