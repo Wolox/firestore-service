@@ -25,7 +25,7 @@ Once you have your credentials and the package install you can start using fires
 
 You will need to initialize the service as soon as you can.
 
-```javascript
+```js
 import firestoreService from 'firestore-service'
 
 const firebaseConfig = {
@@ -66,7 +66,7 @@ You can get all the elements from a collection by using get with the path toward
 Note: Have in mind that the path will be 'collection/id/collection2/id2/.../collection'
 It will always finish with a collection.
 
-```javascript
+```js
 const path = 'regions'
 
 const response = await firestoreService.GET(path);
@@ -87,7 +87,7 @@ In the response there will be all the attributes of the NA document.
 
 You can update an element by calling POST with the path towards the collection, the id of the item to update and the body.
 
-```javascript
+```js
 const path = 'regions/NA/users?id=123'
 
 const body = {
@@ -102,7 +102,7 @@ firestoreService.POST(path, body)
 
 You can delete a certain item from a collection by using DELETE with a path and an id as queryparam.
 
-```javascript
+```js
 const path = 'regions/NA/users?id=123'
 
 firestoreService.DELETE(path)
@@ -115,7 +115,7 @@ The user from the NA region with the id 123 will be deleted.
 
 You can create a new element on a collection by using CREATE and the path towards the desire collection.
 
-```javascript
+```js
 const path = 'regions/LAS/users'
 
 const response = await firestoreService.CREATE(path)
@@ -127,7 +127,7 @@ In the response there will be the id to the created document.
 
 You can update an element by calling POST with the path towards the collection, the id of the item to update and the body.
 
-```javascript
+```js
 const path = 'regions/NA/users?id=123'
 
 const body = {
