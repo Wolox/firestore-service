@@ -1,6 +1,6 @@
 {
   "name": "firestore-service",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Create firestore queries with simple HTTP methods",
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
@@ -41,6 +41,7 @@
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.1",
+    "eslint-plugin-react": "^7.11.1",
     "jest": "^23.2.0",
     "module-resolver": "^1.0.0",
     "prettier": "^1.13.7",

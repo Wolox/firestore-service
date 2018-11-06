@@ -50,14 +50,14 @@ function initializeFirestore(keys) {
 
 async function getData({ pathname, query }) {
   try {
+    const { id, filters } = query;
     let data = firestore.collection(pathname);
-    data = await (query.id
+    data = await (id
       ? data
-          .doc(query.id)
+          .doc(id)
           .get()
           .then(item => ({ id: item.id, ...item.data() }))
       : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
-
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
     return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.GET);
@@ -78,11 +78,11 @@ async function createDoc({ pathname }, body) {
 
 async function postData({ pathname, query }, body) {
   try {
-    const response = await firestore
+    const data = await firestore
       .collection(pathname)
       .doc(query.id)
       .set(body);
-    return generateResponse(true, response, SUCCESS_CODES.OK, STATUS.OK, REQUEST.POST);
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.POST);
   } catch (error) {
     return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.POST);
   }
