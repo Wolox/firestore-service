@@ -50,15 +50,18 @@ function initializeFirestore(keys) {
 
 async function getData({ pathname, query }) {
   try {
-    const { id, filters, limit } = query;
+    const { id, limit } = query;
     let data = firestore.collection(pathname);
     data = await (id
       ? data
-        .doc(id)
-        .get()
-        .then(item => ({ id: item.id, ...item.data() }))
-      : limit ?
-        data.limit(limit).get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+          .doc(id)
+          .get()
+          .then(item => ({ id: item.id, ...item.data() }))
+      : limit
+        ? data
+            .limit(Number(limit))
+            .get()
+            .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
         : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
