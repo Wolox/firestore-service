@@ -48,9 +48,9 @@ function initializeFirestore(keys) {
   }
 }
 
-async function getData({ pathname, query }) {
+async function getData({ path }) {
   try {
-    const { id, limit } = query;
+    const [pathname, id] = path.split('/id/');
     let data = firestore.collection(pathname);
     data = await (id
       ? data

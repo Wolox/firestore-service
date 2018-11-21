@@ -1,33 +1,33 @@
 export const getMock = {
   success: {
-    path: "tests/get/users/id/J8NR45UzDffyMY0wBNoa",
+    path: 'tests/get/users/J8NR45UzDffyMY0wBNoa',
     response: {
       data: {
         age: 33,
-        firstName: "Mike",
-        id: "J8NR45UzDffyMY0wBNoa",
-        lastName: "Poe"
+        firstName: 'Mike',
+        id: 'J8NR45UzDffyMY0wBNoa',
+        lastName: 'Poe'
       },
       ok: true,
-      request: "GET",
+      request: 'GET',
       status: 200,
-      statusText: "OK"
+      statusText: 'OK'
     }
   },
   failure: {
-    path: "tests/get/users/wrongName",
+    path: 'tests/get/users/wrongName',
     response: {
       ok: false,
-      request: "GET",
+      request: 'GET',
       status: 400,
-      statusText: "Failure"
+      statusText: 'Failure'
     }
   }
 };
 
 export const getCollectionMock = {
   getAll: {
-    path: "tests/get/users",
+    path: 'tests/get/users',
     response: {
       data: [
         {
@@ -38,33 +38,30 @@ export const getCollectionMock = {
         },
         {
           age: 22,
-          firstName: "Matt",
-          id: "EFUsC6gMx052i39GFz8a",
-          lastName: "Myers"
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
         },
         {
           age: 33,
-          firstName: "Mike",
-          id: "J8NR45UzDffyMY0wBNoa",
-          lastName: "Poe"
+          firstName: 'Mike',
+          id: 'J8NR45UzDffyMY0wBNoa',
+          lastName: 'Poe'
         },
         {
           age: 20,
-          firstName: "May",
-          id: "q5LpatgtZwj2U2OalZKR",
-          lastName: "June"
+          firstName: 'May',
+          id: 'q5LpatgtZwj2U2OalZKR',
+          lastName: 'June'
         }
       ],
       ok: true,
-      request: "GET",
+      request: 'GET',
       status: 200,
-      statusText: "OK"
+      statusText: 'OK'
     }
   },
-<<<<<<< HEAD
-  getAllFilter: {
-    path: "tests/get/users",
-=======
+
   getOnlyTwo: {
     path: 'tests/get/users?limit=2',
     response: {
@@ -90,7 +87,6 @@ export const getCollectionMock = {
   },
   getOnlyThree: {
     path: 'tests/get/users?limit=3',
->>>>>>> master
     response: {
       data: [
         {
@@ -101,12 +97,13 @@ export const getCollectionMock = {
         },
         {
           age: 22,
-          firstName: "Matt",
-          id: "EFUsC6gMx052i39GFz8a",
-          lastName: "Myers"
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
         },
         {
           age: 33,
+<<<<<<< Updated upstream
 <<<<<<< HEAD
           firstName: "Mike",
           id: "J8NR45UzDffyMY0wBNoa",
@@ -122,12 +119,23 @@ export const getCollectionMock = {
           id: 'J8NR45UzDffyMY0wBNoa',
           lastName: 'Poe'
 >>>>>>> master
+=======
+          firstName: 'Mike',
+          id: 'J8NR45UzDffyMY0wBNoa',
+          lastName: 'Poe'
+        },
+        {
+          age: 20,
+          firstName: 'May',
+          id: 'q5LpatgtZwj2U2OalZKR',
+          lastName: 'June'
+>>>>>>> Stashed changes
         }
       ],
       ok: true,
-      request: "GET",
+      request: 'GET',
       status: 200,
-      statusText: "OK"
+      statusText: 'OK'
     }
   }
 };
