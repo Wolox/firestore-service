@@ -1,13 +1,8 @@
 export const getMock = {
   success: {
-    path: 'tests/get/users/J8NR45UzDffyMY0wBNoa',
+    path: 'tests/get/users?id=J8NR45UzDffyMY0wBNoa',
     response: {
-      data: {
-        age: 33,
-        firstName: 'Mike',
-        id: 'J8NR45UzDffyMY0wBNoa',
-        lastName: 'Poe'
-      },
+      data: { age: 33, firstName: 'Mike', id: 'J8NR45UzDffyMY0wBNoa', lastName: 'Poe' },
       ok: true,
       request: 'GET',
       status: 200,
@@ -61,7 +56,6 @@ export const getCollectionMock = {
       statusText: 'OK'
     }
   },
-
   getOnlyTwo: {
     path: 'tests/get/users?limit=2',
     response: {
@@ -103,33 +97,9 @@ export const getCollectionMock = {
         },
         {
           age: 33,
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-          firstName: "Mike",
-          id: "J8NR45UzDffyMY0wBNoa",
-          lastName: "Poe"
-        },
-        {
-          age: 20,
-          firstName: "May",
-          id: "q5LpatgtZwj2U2OalZKR",
-          lastName: "June"
-=======
           firstName: 'Mike',
           id: 'J8NR45UzDffyMY0wBNoa',
           lastName: 'Poe'
->>>>>>> master
-=======
-          firstName: 'Mike',
-          id: 'J8NR45UzDffyMY0wBNoa',
-          lastName: 'Poe'
-        },
-        {
-          age: 20,
-          firstName: 'May',
-          id: 'q5LpatgtZwj2U2OalZKR',
-          lastName: 'June'
->>>>>>> Stashed changes
         }
       ],
       ok: true,
