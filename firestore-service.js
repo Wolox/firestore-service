@@ -1,12 +1,12 @@
-import url from "url";
+import url from 'url';
 
-import firebase from "firebase";
+import firebase from 'firebase';
 
 let firestore;
 
 const STATUS = {
-  OK: "OK",
-  FAILURE: "Failure"
+  OK: 'OK',
+  FAILURE: 'Failure'
 };
 
 const SUCCESS_CODES = {
@@ -24,11 +24,11 @@ const CLIENT_ERROR_CODES = {
 };
 
 const REQUEST = {
-  INITIALIZE: "INITIALIZE",
-  CREATE: "CREATE",
-  GET: "GET",
-  POST: "POST",
-  DELETE: "DELETE"
+  INITIALIZE: 'INITIALIZE',
+  CREATE: 'CREATE',
+  GET: 'GET',
+  POST: 'POST',
+  DELETE: 'DELETE'
 };
 
 const generateResponse = (ok, data, status, statusText, request) => ({
@@ -42,53 +42,30 @@ const generateResponse = (ok, data, status, statusText, request) => ({
 function initializeFirestore(keys) {
   try {
     firestore = firebase.initializeApp(keys).firestore();
-    return generateResponse(
-      true,
-      firestore,
-      SUCCESS_CODES.OK,
-      STATUS.OK,
-      REQUEST.INITIALIZE
-    );
+    return generateResponse(true, firestore, SUCCESS_CODES.OK, STATUS.OK, REQUEST.INITIALIZE);
   } catch (error) {
-    return generateResponse(
-      false,
-      error,
-      CLIENT_ERROR_CODES.BAD_REQUEST,
-      STATUS.FAILURE,
-      REQUEST.INITIALIZE
-    );
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.INITIALIZE);
   }
 }
 
-async function getData({ path }) {
+async function getData({ pathname, query }) {
   try {
-    const [pathname, id] = path.split("/id/");
+    const { id, limit } = query;
     let data = firestore.collection(pathname);
     data = await (id
       ? data
           .doc(id)
           .get()
           .then(item => ({ id: item.id, ...item.data() }))
-      : data
-          .get()
-          .then(snapshot =>
-            snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-          ));
-    return generateResponse(
-      true,
-      data,
-      SUCCESS_CODES.OK,
-      STATUS.OK,
-      REQUEST.GET
-    );
+      : limit
+        ? data
+            .limit(Number(limit))
+            .get()
+            .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+        : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
-    return generateResponse(
-      false,
-      error,
-      CLIENT_ERROR_CODES.BAD_REQUEST,
-      STATUS.FAILURE,
-      REQUEST.GET
-    );
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.GET);
   }
 }
 
@@ -98,21 +75,9 @@ async function createDoc({ pathname }, body) {
       .collection(pathname)
       .add(body)
       .then(ref => ref.id);
-    return generateResponse(
-      true,
-      data,
-      SUCCESS_CODES.CREATED,
-      STATUS.OK,
-      REQUEST.CREATE
-    );
+    return generateResponse(true, data, SUCCESS_CODES.CREATED, STATUS.OK, REQUEST.CREATE);
   } catch (error) {
-    return generateResponse(
-      false,
-      error,
-      CLIENT_ERROR_CODES.BAD_REQUEST,
-      STATUS.FAILURE,
-      REQUEST.CREATE
-    );
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.CREATE);
   }
 }
 
@@ -122,21 +87,9 @@ async function postData({ pathname, query }, body) {
       .collection(pathname)
       .doc(query.id)
       .set(body);
-    return generateResponse(
-      true,
-      data,
-      SUCCESS_CODES.OK,
-      STATUS.OK,
-      REQUEST.POST
-    );
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.POST);
   } catch (error) {
-    return generateResponse(
-      false,
-      error,
-      CLIENT_ERROR_CODES.BAD_REQUEST,
-      STATUS.FAILURE,
-      REQUEST.POST
-    );
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.POST);
   }
 }
 
@@ -146,21 +99,9 @@ async function deleteDoc({ pathname, query }) {
       .collection(pathname)
       .doc(query.id)
       .delete();
-    return generateResponse(
-      true,
-      data,
-      SUCCESS_CODES.OK,
-      STATUS.OK,
-      REQUEST.DELETE
-    );
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.DELETE);
   } catch (error) {
-    return generateResponse(
-      false,
-      error,
-      CLIENT_ERROR_CODES.BAD_REQUEST,
-      STATUS.FAILURE,
-      REQUEST.DELETE
-    );
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.DELETE);
   }
 }
 

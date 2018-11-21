@@ -31,6 +31,12 @@ export const getCollectionMock = {
     response: {
       data: [
         {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        },
+        {
           age: 22,
           firstName: "Matt",
           id: "EFUsC6gMx052i39GFz8a",
@@ -55,10 +61,44 @@ export const getCollectionMock = {
       statusText: "OK"
     }
   },
+<<<<<<< HEAD
   getAllFilter: {
     path: "tests/get/users",
+=======
+  getOnlyTwo: {
+    path: 'tests/get/users?limit=2',
     response: {
       data: [
+        {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        },
+        {
+          age: 22,
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
+        }
+      ],
+      ok: true,
+      request: 'GET',
+      status: 200,
+      statusText: 'OK'
+    }
+  },
+  getOnlyThree: {
+    path: 'tests/get/users?limit=3',
+>>>>>>> master
+    response: {
+      data: [
+        {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        },
         {
           age: 22,
           firstName: "Matt",
@@ -67,6 +107,7 @@ export const getCollectionMock = {
         },
         {
           age: 33,
+<<<<<<< HEAD
           firstName: "Mike",
           id: "J8NR45UzDffyMY0wBNoa",
           lastName: "Poe"
@@ -76,6 +117,11 @@ export const getCollectionMock = {
           firstName: "May",
           id: "q5LpatgtZwj2U2OalZKR",
           lastName: "June"
+=======
+          firstName: 'Mike',
+          id: 'J8NR45UzDffyMY0wBNoa',
+          lastName: 'Poe'
+>>>>>>> master
         }
       ],
       ok: true,

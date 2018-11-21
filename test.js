@@ -36,9 +36,14 @@ test('TEST: GET - Get an entire collection from a specific path', async () => {
   expect(response).toEqual(getCollectionMock.getAll.response);
 });
 
-test('TEST: GET WITH FILTERS - Get the filter elements from a collection', async () => {
-  const response = await firestoreService.GET(getCollectionMock.getAll.path);
-  expect(response).toEqual(getCollectionMock.getAll.response);
+test('TEST: GET WITH LIMIT 2 - Get only 2 elements from a collection', async () => {
+  const response = await firestoreService.GET(getCollectionMock.getOnlyTwo.path);
+  expect(response).toEqual(getCollectionMock.getOnlyTwo.response);
+});
+
+test('TEST: GET WITH LIMIT 3 - Get only 3 elements from a collection', async () => {
+  const response = await firestoreService.GET(getCollectionMock.getOnlyThree.path);
+  expect(response).toEqual(getCollectionMock.getOnlyThree.response);
 });
 
 test('TEST: FAILURE GET - Recieve a response with an error when the params are wrong', async () => {
