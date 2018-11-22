@@ -6,9 +6,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: './firestore-service.js',
+  entry: './src/firestore-service.js',
   output: {
-    path: path.join(__dirname, '/'),
+    path: path.join(__dirname, '/dist'),
     filename: 'index.js',
     library: 'firestore-service',
     libraryTarget: 'umd'

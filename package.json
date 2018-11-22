@@ -2,10 +2,15 @@
   "name": "firestore-service",
   "version": "1.0.9",
   "description": "Create firestore queries with simple HTTP methods",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
     "build": "webpack",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "lint": "find ./src -name \\**.js | xargs ./node_modules/eslint/bin/eslint.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +23,12 @@
   },
   "homepage": "https://github.com/Wolox/firestore-service#readme",
   "dependencies": {
-    "firebase": "^5.2.0",
-    "@babel/core": "^7.0.0-beta.55",
-    "@babel/plugin-transform-spread": "^7.0.0-beta.55"
+    "eslint": "^5.9.0",
+    "firebase": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/plugin-transform-spread": "^7.0.0-beta.55",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.5",
     "babel-jest": "^23.2.0",
@@ -33,18 +39,9 @@
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "dotenv": "^6.0.0",
-    "eslint": "^5.0.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-flowtype": "^2.50.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.6.1",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-config-wolox": "^2.2.0",
     "jest": "^23.2.0",
     "module-resolver": "^1.0.0",
-    "prettier": "^1.13.7",
     "transform-runtime": "0.0.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.16.3",

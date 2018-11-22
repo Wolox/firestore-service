@@ -45,6 +45,7 @@ const generateResponse = (ok, data, status, statusText, request) => ({
 function initializeFirestore(keys) {
   try {
     firestore = firebase.initializeApp(keys).firestore();
+
     return generateResponse(true, firestore, SUCCESS_CODES.OK, STATUS.OK, REQUEST.INITIALIZE);
   } catch (error) {
     return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.INITIALIZE);
@@ -67,6 +68,7 @@ async function getData({ pathname, query }) {
             .get()
             .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
         : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
+        
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
     return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.GET);
