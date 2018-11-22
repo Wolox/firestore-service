@@ -25,6 +25,7 @@ Your new feature **must** be tested with the proper tools. In this project, we u
 npm run test
 ```
 All new tests needs to be pass in order to approve the PR.
+`TEST: INITIALIZE - Initialize Firestore Service` must not be marked as `skipped` for the tests to run properly. This means that if you want to run some test individually keep in mind that you will have to run `TEST: INITIALIZE - Initialize Firestore Service` too.
 
 ## Documentation
 
