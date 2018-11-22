@@ -63,7 +63,7 @@ You can get all the elements from a collection or a specific element if the elem
 
 Note: The path will always be `collection/id/collection2/id2/...`. The "url" will finish with a collection if you want an array of elements or with an id if you want a single one.
 
-Eg:
+E.g.:
 
 ```js
 const response = await firestoreService.GET('regions');
@@ -82,7 +82,7 @@ The response will have the information about the region with id 32.
 
 You can create an element by calling POST with the collection's path and the body with the element's data.
 
-Eg:
+E.g.:
 
 ```js
 const body = {
@@ -98,7 +98,7 @@ The previous request will create a new user under the region with id 32 using th
 
 You can delete a certain element from a collection by using DELETE with a path to the element.
 
-Eg:
+E.g.:
 
 ```js
 firestoreService.DELETE('regions/32/users/1')
@@ -109,7 +109,7 @@ The user from the region with id 32 that has id 1 will be deleted. The response 
 
 You can update an element by calling PATCH and providing only the fields desired to be updated from an element.
 
-Eg:
+E.g.:
 
 ```js
 const body = {
@@ -124,7 +124,7 @@ The user with id 1 that belongs to the region with id 32 will have his name alte
 
 You can update an element by calling PUT and providing all the fields in an element, providing less fields will make the rest of the values `null` (except for the id). Providing a different id in the body will result in an error.
 
-Eg:
+E.g.:
 
 ```js
 const body = {
