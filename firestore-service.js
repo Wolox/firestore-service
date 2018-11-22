@@ -2,6 +2,8 @@ import url from 'url';
 
 import firebase from 'firebase';
 
+import { getIdFromPath, getCollectionPath } from './utils';
+
 let firestore;
 
 const STATUS = {
@@ -48,10 +50,12 @@ function initializeFirestore(keys) {
   }
 }
 
-async function getData({ path }) {
+async function getData({ pathname, query }) {
   try {
-    const [pathname, id] = path.split('/id/');
-    let data = firestore.collection(pathname);
+    const id = getIdFromPath(pathname);
+    const path = id ? getCollectionPath(pathname) : pathname;
+    const { limit } = query;
+    let data = firestore.collection(path);
     data = await (id
       ? data
           .doc(id)
@@ -81,11 +85,13 @@ async function createDoc({ pathname }, body) {
   }
 }
 
-async function postData({ pathname, query }, body) {
+async function postData({ pathname }, body) {
   try {
+    const id = getIdFromPath(pathname);
+    const path = id ? getCollectionPath(pathname) : pathname;
     const data = await firestore
-      .collection(pathname)
-      .doc(query.id)
+      .collection(path)
+      .doc(id)
       .set(body);
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.POST);
   } catch (error) {
