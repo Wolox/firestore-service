@@ -1,19 +1,17 @@
 export default {
   success: {
     path: 'tests/create/animals',
-    body: { specimen: 'unkown', name: 'None' },
-    newBody: { specimen: 'Shark', name: 'Little Shark' },
+    body: { name: 'Bob the test Bear', specimen: 'Bear' },
     response: {
       ok: true,
-      request: 'GET',
-      status: 200,
+      request: 'POST',
+      status: 201,
       statusText: 'OK'
     }
   },
   failure: {
-    path: 'tests/create/animals',
-    body: { specimen: 'unkown', name: 'None' },
-    newBody: undefined,
+    path: 'tests/create/animals/home/thisIsWrong',
+    body: undefined,
     response: {
       ok: false,
       request: 'POST',
