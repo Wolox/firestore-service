@@ -28,7 +28,8 @@ const REQUEST = {
   CREATE: 'CREATE',
   GET: 'GET',
   POST: 'POST',
-  DELETE: 'DELETE'
+  DELETE: 'DELETE',
+  PUT: 'PUT'
 };
 
 const generateResponse = (ok, data, status, statusText, request) => ({
@@ -75,21 +76,21 @@ async function createDoc({ pathname }, body) {
       .collection(pathname)
       .add(body)
       .then(ref => ref.id);
-    return generateResponse(true, data, SUCCESS_CODES.CREATED, STATUS.OK, REQUEST.CREATE);
+    return generateResponse(true, data, SUCCESS_CODES.CREATED, STATUS.OK, REQUEST.POST);
   } catch (error) {
-    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.CREATE);
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.POST);
   }
 }
 
-async function postData({ pathname, query }, body) {
+async function modifyDoc({ pathname, query }, body) {
   try {
     const data = await firestore
       .collection(pathname)
       .doc(query.id)
       .set(body);
-    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.POST);
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.PUT);
   } catch (error) {
-    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.POST);
+    return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.PUT);
   }
 }
 
@@ -108,10 +109,10 @@ async function deleteDoc({ pathname, query }) {
 const firestoreService = {
   INITIALIZE: keys => initializeFirestore(keys),
   GET: path => getData(url.parse(path, true)),
-  POST: (path, body) => postData(url.parse(path, true), body),
+  PUT: (path, body) => modifyDoc(url.parse(path, true), body),
   DELETE: path => deleteDoc(url.parse(path, true)),
-  CREATE: (path, body) => createDoc(url.parse(path, true), body),
-  PATCH: (path, body) => postData(url.parse(path, true), body)
+  POST: (path, body) => createDoc(url.parse(path, true), body),
+  PATCH: (path, body) => modifyDoc(url.parse(path, true), body)
 };
 
 export default firestoreService;
