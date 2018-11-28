@@ -9,7 +9,7 @@ export default {
     }
   },
   failure: {
-    path: 'tests/failure/delete/request',
+    path: 'tests/failure/delete/request/wrong',
     response: {
       ok: false,
       request: 'DELETE',

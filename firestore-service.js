@@ -2,6 +2,8 @@ import url from 'url';
 
 import firebase from 'firebase';
 
+import { getPathAndElementId } from './utils';
+
 let firestore;
 
 const STATUS = {
@@ -51,8 +53,9 @@ function initializeFirestore(keys) {
 
 async function getData({ pathname, query }) {
   try {
-    const { id, limit } = query;
-    let data = firestore.collection(pathname);
+    const { id, path } = getPathAndElementId(pathname);
+    const { limit } = query;
+    let data = firestore.collection(path);
     data = await (id
       ? data
           .doc(id)
@@ -72,8 +75,9 @@ async function getData({ pathname, query }) {
 
 async function createDoc({ pathname }, body) {
   try {
+    const { path } = getPathAndElementId(pathname);
     const data = await firestore
-      .collection(pathname)
+      .collection(path)
       .add(body)
       .then(ref => ref.id);
     return generateResponse(true, data, SUCCESS_CODES.CREATED, STATUS.OK, REQUEST.POST);
@@ -82,11 +86,12 @@ async function createDoc({ pathname }, body) {
   }
 }
 
-async function modifyDoc({ pathname, query }, body) {
+async function modifyDoc({ pathname }, body) {
   try {
+    const { id, path } = getPathAndElementId(pathname);
     const data = await firestore
-      .collection(pathname)
-      .doc(query.id)
+      .collection(path)
+      .doc(id)
       .set(body);
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.PUT);
   } catch (error) {
@@ -94,11 +99,12 @@ async function modifyDoc({ pathname, query }, body) {
   }
 }
 
-async function deleteDoc({ pathname, query }) {
+async function deleteDoc({ pathname }) {
   try {
+    const { id, path } = getPathAndElementId(pathname);
     const data = await firestore
-      .collection(pathname)
-      .doc(query.id)
+      .collection(path)
+      .doc(id)
       .delete();
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.DELETE);
   } catch (error) {

@@ -46,14 +46,19 @@ test('TEST: GET WITH LIMIT 3 - Get only 3 elements from a collection', async () 
   expect(response).toEqual(getCollectionMock.getOnlyThree.response);
 });
 
-test('TEST: FAILURE GET - Recieve a response with an error when the params are wrong', async () => {
-  const response = await firestoreService.GET(getMock.failure.path);
-  expect(response).toEqual(expect.objectContaining(getMock.failure.response));
+test('TEST: EMPTY GET BY ID - Recieve an empty response when element with id does not exist', async () => {
+  const response = await firestoreService.GET(getMock.wrongId.path);
+  expect(response).toEqual(expect.objectContaining(getMock.wrongId.response));
+});
+
+test('TEST: WRONG PATH - Recieve an empty response when path does not exist', async () => {
+  const response = await firestoreService.GET(getMock.wrongPath.path);
+  expect(response).toEqual(expect.objectContaining(getMock.wrongPath.response));
 });
 
 test('TEST: CREATE - Create a new document in a specific collection', async () => {
   const response = await firestoreService.POST(postMock.success.path, postMock.success.body);
-  const newUser = await firestoreService.GET(`${postMock.success.path}?id=${response.data}`);
+  const newUser = await firestoreService.GET(`${postMock.success.path}/${response.data}`);
   expect(response).toEqual({
     data: newUser.data.id,
     ...postMock.success.response
@@ -67,7 +72,7 @@ test('TEST: FAILURE CREATE - Recieve a response with an error when the params ar
 
 test('TEST: DELETE - Deletes a specific document in a collection', async () => {
   const response = await firestoreService.POST(deleteMock.success.path);
-  const deleteResponse = await firestoreService.DELETE(`${deleteMock.success.path}?id=${response.data}`);
+  const deleteResponse = await firestoreService.DELETE(`${deleteMock.success.path}/${response.data}`);
   expect(deleteResponse).toEqual(deleteMock.success.response);
 });
 
@@ -76,10 +81,10 @@ test('TEST: FAILURE DELETE - Recieve a response with an error when the params ar
   expect(response).toEqual(expect.objectContaining(deleteMock.failure.response));
 });
 
-test('TEST: PUT - Modifies a specific docuemnt in a collection', async () => {
+test('TEST: PUT - Modifies a specific document in a collection', async () => {
   const response = await firestoreService.POST(putMock.success.path, putMock.success.body);
-  await firestoreService.PUT(`${putMock.success.path}?id=${response.data}`, putMock.success.newBody);
-  const modified = await firestoreService.GET(`${putMock.success.path}?id=${response.data}`);
+  await firestoreService.PUT(`${putMock.success.path}/${response.data}`, putMock.success.newBody);
+  const modified = await firestoreService.GET(`${putMock.success.path}/${response.data}`);
   expect(modified).toEqual({
     data: { ...putMock.success.newBody, id: response.data },
     ...putMock.success.response
@@ -88,8 +93,8 @@ test('TEST: PUT - Modifies a specific docuemnt in a collection', async () => {
 
 test('TEST: PATCH - Modifies a specific docuemnt in a collection', async () => {
   const response = await firestoreService.POST(putMock.success.path, putMock.success.body);
-  await firestoreService.PATCH(`${putMock.success.path}?id=${response.data}`, putMock.success.newBody);
-  const modified = await firestoreService.GET(`${putMock.success.path}?id=${response.data}`);
+  await firestoreService.PATCH(`${putMock.success.path}/${response.data}`, putMock.success.newBody);
+  const modified = await firestoreService.GET(`${putMock.success.path}/${response.data}`);
   expect(modified).toEqual({
     data: { ...putMock.success.newBody, id: response.data },
     ...putMock.success.response
@@ -99,7 +104,7 @@ test('TEST: PATCH - Modifies a specific docuemnt in a collection', async () => {
 test('TEST: FAILURE POST/PATCH - Recieve a response with an error when the params are wrong', async () => {
   const response = await firestoreService.POST(putMock.failure.path, putMock.failure.body);
   const modifyResponse = await firestoreService.PUT(
-    `${putMock.failure.path}?id=${response.data}`,
+    `${putMock.failure.path}/${response.data}`,
     putMock.failure.newBody
   );
   expect(modifyResponse).toEqual(expect.objectContaining(putMock.failure.response));

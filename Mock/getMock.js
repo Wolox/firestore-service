@@ -1,6 +1,6 @@
 export const getMock = {
   success: {
-    path: 'tests/get/users?id=J8NR45UzDffyMY0wBNoa',
+    path: 'tests/get/users/J8NR45UzDffyMY0wBNoa',
     response: {
       data: { age: 33, firstName: 'Mike', id: 'J8NR45UzDffyMY0wBNoa', lastName: 'Poe' },
       ok: true,
@@ -9,13 +9,26 @@ export const getMock = {
       statusText: 'OK'
     }
   },
-  failure: {
-    path: 'tests/get/users/wrongName',
+  wrongId: {
+    path: 'tests/get/users/wrongId',
     response: {
-      ok: false,
+      data: {
+        id: 'wrongId'
+      },
+      ok: true,
       request: 'GET',
-      status: 400,
-      statusText: 'Failure'
+      status: 200,
+      statusText: 'OK'
+    }
+  },
+  wrongPath: {
+    path: 'tests/get/wrongPath',
+    response: {
+      data: [],
+      ok: true,
+      request: 'GET',
+      status: 200,
+      statusText: 'OK'
     }
   }
 };
