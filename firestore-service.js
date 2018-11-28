@@ -75,8 +75,9 @@ async function getData({ pathname, query }) {
 
 async function createDoc({ pathname }, body) {
   try {
+    const path = getIdFromPath(pathname) ? getCollectionPath(pathname) : pathname;
     const data = await firestore
-      .collection(pathname)
+      .collection(path)
       .add(body)
       .then(ref => ref.id);
     return generateResponse(true, data, SUCCESS_CODES.CREATED, STATUS.OK, REQUEST.CREATE);
@@ -99,11 +100,13 @@ async function postData({ pathname }, body) {
   }
 }
 
-async function deleteDoc({ pathname, query }) {
+async function deleteDoc({ pathname }) {
   try {
+    const id = getIdFromPath(pathname);
+    const path = id ? getCollectionPath(pathname) : pathname;
     const data = await firestore
-      .collection(pathname)
-      .doc(query.id)
+      .collection(path)
+      .doc(id)
       .delete();
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.DELETE);
   } catch (error) {
