@@ -6,3 +6,9 @@ export function getIdFromPath(path) {
 export function getCollectionPath(pathname) {
   return pathname.substring(0, pathname.lastIndexOf('/'));
 }
+
+export function getPathAndElementId(pathname) {
+  const id = getIdFromPath(pathname);
+  const path = id ? getCollectionPath(pathname) : pathname;
+  return { id, path };
+}

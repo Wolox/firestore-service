@@ -2,7 +2,7 @@ import url from 'url';
 
 import firebase from 'firebase';
 
-import { getIdFromPath, getCollectionPath } from './utils';
+import { getPathAndElementId } from './utils';
 
 let firestore;
 
@@ -52,8 +52,7 @@ function initializeFirestore(keys) {
 
 async function getData({ pathname, query }) {
   try {
-    const id = getIdFromPath(pathname);
-    const path = id ? getCollectionPath(pathname) : pathname;
+    const { id, path } = getPathAndElementId(pathname);
     const { limit } = query;
     let data = firestore.collection(path);
     data = await (id
@@ -75,7 +74,7 @@ async function getData({ pathname, query }) {
 
 async function createDoc({ pathname }, body) {
   try {
-    const path = getIdFromPath(pathname) ? getCollectionPath(pathname) : pathname;
+    const { path } = getPathAndElementId(pathname);
     const data = await firestore
       .collection(path)
       .add(body)
@@ -88,8 +87,7 @@ async function createDoc({ pathname }, body) {
 
 async function postData({ pathname }, body) {
   try {
-    const id = getIdFromPath(pathname);
-    const path = id ? getCollectionPath(pathname) : pathname;
+    const { id, path } = getPathAndElementId(pathname);
     const data = await firestore
       .collection(path)
       .doc(id)
@@ -102,8 +100,7 @@ async function postData({ pathname }, body) {
 
 async function deleteDoc({ pathname }) {
   try {
-    const id = getIdFromPath(pathname);
-    const path = id ? getCollectionPath(pathname) : pathname;
+    const { id, path } = getPathAndElementId(pathname);
     const data = await firestore
       .collection(path)
       .doc(id)
