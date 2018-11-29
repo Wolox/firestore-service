@@ -37,12 +37,12 @@ test('TEST: GET - Get an entire collection from a specific path', async () => {
 });
 
 test('TEST: GET WITH LIMIT 2 - Get only 2 elements from a collection', async () => {
-  const response = await firestoreService.GET(getCollectionMock.getOnlyTwo.path);
+  const response = await firestoreService.GET(getCollectionMock.getOnlyTwo.path, getCollectionMock.getOnlyTwo.body);
   expect(response).toEqual(getCollectionMock.getOnlyTwo.response);
 });
 
 test('TEST: GET WITH LIMIT 3 - Get only 3 elements from a collection', async () => {
-  const response = await firestoreService.GET(getCollectionMock.getOnlyThree.path);
+  const response = await firestoreService.GET(getCollectionMock.getOnlyThree.path, getCollectionMock.getOnlyThree.body);
   expect(response).toEqual(getCollectionMock.getOnlyThree.response);
 });
 

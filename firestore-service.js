@@ -51,21 +51,20 @@ function initializeFirestore(keys) {
   }
 }
 
-async function getData({ pathname, query }) {
+async function getData({ pathname }, { limit }) {
   try {
     const { id, path } = getPathAndElementId(pathname);
-    const { limit } = query;
     let data = firestore.collection(path);
     data = await (id
       ? data
-          .doc(id)
-          .get()
-          .then(item => ({ id: item.id, ...item.data() }))
+        .doc(id)
+        .get()
+        .then(item => ({ id: item.id, ...item.data() }))
       : limit
         ? data
-            .limit(Number(limit))
-            .get()
-            .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+          .limit(Number(limit))
+          .get()
+          .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
         : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
@@ -114,7 +113,7 @@ async function deleteDoc({ pathname }) {
 
 const firestoreService = {
   INITIALIZE: keys => initializeFirestore(keys),
-  GET: path => getData(url.parse(path, true)),
+  GET: (path, body) => getData(url.parse(path, true), body),
   PUT: (path, body) => modifyDoc(url.parse(path, true), body),
   DELETE: path => deleteDoc(url.parse(path, true)),
   POST: (path, body) => createDoc(url.parse(path, true), body),
