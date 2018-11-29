@@ -1,3 +1,4 @@
+import { test, expect } from 'jest';
 import initializeMock from './Mock/initializeMock';
 import { getMock, getCollectionMock } from './Mock/getMock';
 import postMock from './Mock/postMock';
@@ -17,7 +18,7 @@ const firebaseConfig = {
 };
 
 test('TEST: INITIALIZE - Initialize Firestore Service', async () => {
-  const response = await firestoreService.INITIALIZE(firebaseConfig);
+  const response = await firestoreService.INITIALIZE(firebaseConfig); // eslint-disa
   expect(response).toEqual(expect.objectContaining(initializeMock.success));
 });
 

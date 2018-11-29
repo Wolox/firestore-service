@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 import { getPathAndElementId } from './utils';
 
-let firestore;
+let firestore = null;
 
 const STATUS = {
   OK: 'OK',
@@ -34,6 +34,7 @@ const REQUEST = {
   PUT: 'PUT'
 };
 
+// eslint-disable-next-line max-params
 const generateResponse = (ok, data, status, statusText, request) => ({
   ok,
   data,
