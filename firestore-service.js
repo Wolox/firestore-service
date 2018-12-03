@@ -51,8 +51,9 @@ function initializeFirestore(keys) {
   }
 }
 
-async function getData({ pathname }, { limit }) {
+async function getData({ pathname }, body = {}) {
   try {
+    const { limit } = body;
     const { id, path } = getPathAndElementId(pathname);
     let data = firestore.collection(path);
     data = await (id
