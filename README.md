@@ -37,7 +37,7 @@ const firebaseConfig = {
   messagingSenderId: xxxxxxxxxxxx
 };
 
-firestoreService.INITIALIZE(firebaseConfig);
+firestoreService.initialize(firebaseConfig);
 
 ```
 
@@ -66,13 +66,13 @@ Note: The path will always be `collection/id/collection2/id2/...`. The "url" wil
 E.g.:
 
 ```js
-const response = await firestoreService.GET('regions');
+const response = await firestoreService.get('regions');
 ```
 
 The response will have all the "regions"
 
 ```js
-const response = await firestoreService.GET('regions/32');
+const response = await firestoreService.get('regions/32');
 ```
 
 The response will have the information about the region with id 32.
@@ -90,7 +90,7 @@ const body = {
   lastName: 'New last name'
 };
 
-firestoreService.POST('regions/32/users', body)
+firestoreService.post('regions/32/users', body)
 ```
 The previous request will create a new user under the region with id 32 using the information sent in the body. It will return the created user with its id.
 
@@ -101,7 +101,7 @@ You can delete a certain element from a collection by using DELETE with a path t
 E.g.:
 
 ```js
-firestoreService.DELETE('regions/32/users/1')
+firestoreService.delete('regions/32/users/1')
 ```
 The user from the region with id 32 that has id 1 will be deleted. The response will be empty
 
@@ -116,7 +116,7 @@ const body = {
   firstName: 'New name2'
 };
 
-firestoreService.PATCH('regions/32/users/1', body)
+firestoreService.patch('regions/32/users/1', body)
 ```
 The user with id 1 that belongs to the region with id 32 will have his name altered but will keep the previous values. The response will contain the updated user
 
@@ -133,7 +133,7 @@ const body = {
   lastName: 'New last name3'
 };
 
-firestoreService.PATCH('regions/32/users/1', body)
+firestoreService.patch('regions/32/users/1', body)
 ```
 The user with id 1 that belongs to the region with id 32 will be altered.The response will contain the edited user.
 
@@ -142,7 +142,7 @@ const body = {
   firstName: 'New name3',
 };
 
-firestoreService.PATCH('regions/32/users/1', body)
+firestoreService.patch('regions/32/users/1', body)
 ```
 The user with id 1 that belongs to the region with id 32 will be altered and the `lastName` field will be set to null. The response will contain the edited user.
 
@@ -153,7 +153,7 @@ const body = {
   lastName: 'New last name3'
 };
 
-firestoreService.PATCH('regions/32/users/1', body)
+firestoreService.patch('regions/32/users/1', body)
 ```
 An error will be thrown because of id mismatch.
 
