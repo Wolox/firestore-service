@@ -47,6 +47,11 @@ test('TEST: GET WITH LIMIT 3 - Get only 3 elements from a collection', async () 
   expect(response).toEqual(getCollectionMock.getOnlyThree.response);
 });
 
+test('TEST: FAILURE GET WITH LIMIT - Recieve a response with an error when the params are wrong', async () => {
+  const response = await firestoreService.get(getCollectionMock.wrongLimit.path, getCollectionMock.wrongLimit.body);
+  expect(response).toEqual(expect.objectContaining(getCollectionMock.wrongLimit.response));
+});
+
 test('TEST: EMPTY GET BY ID - Recieve an empty response when element with id does not exist', async () => {
   const response = await firestoreService.get(getMock.wrongId.path);
   expect(response).toEqual(expect.objectContaining(getMock.wrongId.response));

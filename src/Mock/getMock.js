@@ -122,5 +122,15 @@ export const getCollectionMock = {
       status: 200,
       statusText: 'OK'
     }
+  },
+  wrongLimit: {
+    path: 'tests/get/users',
+    body: { limit: -1 },
+    response: {
+      ok: false,
+      request: 'GET',
+      status: 400,
+      statusText: 'Failure'
+    }
   }
 };
