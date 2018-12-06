@@ -39,7 +39,7 @@
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "dotenv": "^6.0.0",
-    "eslint-config-wolox": "^2.2.0",
+    "eslint-config-wolox": "^2.2.2",
     "husky": "^1.2.0",
     "jest": "^23.2.0",
     "module-resolver": "^1.0.0",
