@@ -70,7 +70,8 @@ export const getCollectionMock = {
     }
   },
   getOnlyTwo: {
-    path: 'tests/get/users?limit=2',
+    path: 'tests/get/users',
+    body: { limit: 2 },
     response: {
       data: [
         {
@@ -93,7 +94,8 @@ export const getCollectionMock = {
     }
   },
   getOnlyThree: {
-    path: 'tests/get/users?limit=3',
+    path: 'tests/get/users',
+    body: { limit: 3 },
     response: {
       data: [
         {
@@ -119,6 +121,16 @@ export const getCollectionMock = {
       request: 'GET',
       status: 200,
       statusText: 'OK'
+    }
+  },
+  wrongLimit: {
+    path: 'tests/get/users',
+    body: { limit: -1 },
+    response: {
+      ok: false,
+      request: 'GET',
+      status: 400,
+      statusText: 'Failure'
     }
   }
 };

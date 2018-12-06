@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import initializeMock from './Mock/initializeMock';
 import { getMock, getCollectionMock } from './Mock/getMock';
 import postMock from './Mock/postMock';
@@ -17,7 +18,7 @@ const firebaseConfig = {
 };
 
 test('TEST: INITIALIZE - Initialize Firestore Service', async () => {
-  const response = await firestoreService.initialize(firebaseConfig); // eslint-disa
+  const response = await firestoreService.initialize(firebaseConfig);
   expect(response).toEqual(expect.objectContaining(initializeMock.success));
 });
 
@@ -37,13 +38,18 @@ test('TEST: GET - Get an entire collection from a specific path', async () => {
 });
 
 test('TEST: GET WITH LIMIT 2 - Get only 2 elements from a collection', async () => {
-  const response = await firestoreService.get(getCollectionMock.getOnlyTwo.path);
+  const response = await firestoreService.get(getCollectionMock.getOnlyTwo.path, getCollectionMock.getOnlyTwo.body);
   expect(response).toEqual(getCollectionMock.getOnlyTwo.response);
 });
 
 test('TEST: GET WITH LIMIT 3 - Get only 3 elements from a collection', async () => {
-  const response = await firestoreService.get(getCollectionMock.getOnlyThree.path);
+  const response = await firestoreService.get(getCollectionMock.getOnlyThree.path, getCollectionMock.getOnlyThree.body);
   expect(response).toEqual(getCollectionMock.getOnlyThree.response);
+});
+
+test('TEST: FAILURE GET WITH LIMIT - Recieve a response with an error when the params are wrong', async () => {
+  const response = await firestoreService.get(getCollectionMock.wrongLimit.path, getCollectionMock.wrongLimit.body);
+  expect(response).toEqual(expect.objectContaining(getCollectionMock.wrongLimit.response));
 });
 
 test('TEST: EMPTY GET BY ID - Recieve an empty response when element with id does not exist', async () => {

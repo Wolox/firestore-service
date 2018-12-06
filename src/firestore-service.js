@@ -53,10 +53,10 @@ function initializeFirestore(keys) {
   }
 }
 
-async function getData({ pathname, query }) {
+async function getData({ pathname }, body = {}) {
   try {
+    const { limit } = body;
     const { id, path } = getPathAndElementId(pathname);
-    const { limit } = query;
     let data = firestore.collection(path);
     if (id) {
       data = await data
@@ -119,7 +119,7 @@ async function deleteDoc({ pathname }) {
 
 const firestoreService = {
   initialize: keys => initializeFirestore(keys),
-  get: path => getData(url.parse(path, true)),
+  get: (path, body) => getData(url.parse(path, true), body),
   put: (path, body) => modifyDoc(url.parse(path, true), body),
   delete: path => deleteDoc(url.parse(path, true)),
   post: (path, body) => createDoc(url.parse(path, true), body),
