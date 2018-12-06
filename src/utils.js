@@ -1,6 +1,7 @@
 export function getIdFromPath(path) {
   const pathArr = path.split('/');
-  return pathArr.length % 2 === 0 && pathArr.pop();
+  const EVEN_LENGTH_DIVISOR = 2;
+  return pathArr.length % EVEN_LENGTH_DIVISOR === 0 && pathArr.pop();
 }
 
 export function getCollectionPath(pathname) {
