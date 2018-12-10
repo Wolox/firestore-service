@@ -2,7 +2,9 @@ import url from 'url';
 
 import firebase from 'firebase';
 
-import { getPathAndElementId } from './utils';
+import { getPathAndElementId } from './Utils/collectionUtils';
+
+import { queryForID, queryForCollection } from './Utils/queryUtils';
 
 let firestore = null;
 
@@ -55,22 +57,12 @@ function initializeFirestore(keys) {
 
 async function getData({ pathname }, body = {}) {
   try {
-    const { limit } = body;
     const { id, path } = getPathAndElementId(pathname);
     let data = firestore.collection(path);
     if (id) {
-      data = await data
-        .doc(id)
-        .get()
-        .then(item => ({ id: item.id, ...item.data() }));
+      data = await queryForID(data, id);
     } else {
-      data = await (
-        limit
-          ? data
-            .limit(Number(limit))
-            .get()
-            .then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-          : data.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))));
+      data = await queryForCollection(data, body);
     }
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
