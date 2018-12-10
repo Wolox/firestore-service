@@ -97,9 +97,9 @@ The response will only have users who are older than 22 years old and younger th
 const response = await firestoreService.get('regions/32', { filters: [ { field: 'age', condition: '<', value: 35 }, { field: 'age', condition: '>', value: 22 } ] });
 ```
 
-Supported condition operators: '<', '<=', '>', '>=', '==' or  'array_contains'
+Supported condition operators: `<`, `<=`, `>`, `>=`, `==` or  `array_contains`
 
-Note: If you want to combine '==' with any of the others you will have to create an index in your db. More info about this here:
+Note: If you want to combine `==` with any of the others you will have to create an index in your db. More info about this here:
 https://firebase.google.com/docs/firestore/query-data/indexing
 
 ### POST
