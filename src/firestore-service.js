@@ -59,11 +59,7 @@ async function getData({ pathname }, body = {}) {
   try {
     const { id, path } = getPathAndElementId(pathname);
     let data = firestore.collection(path);
-    if (id) {
-      data = await queryForID(data, id);
-    } else {
-      data = await queryForCollection(data, body);
-    }
+    data = await (id ? queryForID(data, id) : queryForCollection(data, body));
     return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.GET);
   } catch (error) {
     return generateResponse(false, error, CLIENT_ERROR_CODES.BAD_REQUEST, STATUS.FAILURE, REQUEST.GET);

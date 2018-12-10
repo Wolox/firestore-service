@@ -52,6 +52,21 @@ test('TEST: FAILURE GET WITH LIMIT - Recieve a response with an error when the p
   expect(response).toEqual(expect.objectContaining(getCollectionMock.wrongLimit.response));
 });
 
+test('TEST: GET WITH FILTER - Get only users who are less than 32 years old', async () => {
+  const response = await firestoreService.get(getCollectionMock.getWithFilters.path, getCollectionMock.getWithFilters.body);
+  expect(response).toEqual(getCollectionMock.getWithFilters.response);
+});
+
+test('TEST: GET WITH MULTIPLE FILTERS - Get only users who are less than 32 years old and their name is May ', async () => {
+  const response = await firestoreService.get(getCollectionMock.getWithMultipleFilters.path, getCollectionMock.getWithMultipleFilters.body);
+  expect(response).toEqual(getCollectionMock.getWithMultipleFilters.response);
+});
+
+test('TEST: FAILURE WRONG FILTERS - Recieve a response with an error when the params are wrong ', async () => {
+  const response = await firestoreService.get(getCollectionMock.wrongFilter.path, getCollectionMock.wrongFilter.body);
+  expect(response).toEqual(expect.objectContaining(getCollectionMock.wrongFilter.response));
+});
+
 test('TEST: EMPTY GET BY ID - Recieve an empty response when element with id does not exist', async () => {
   const response = await firestoreService.get(getMock.wrongId.path);
   expect(response).toEqual(expect.objectContaining(getMock.wrongId.response));
