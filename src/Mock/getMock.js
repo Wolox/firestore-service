@@ -203,5 +203,77 @@ export const getCollectionMock = {
       status: 400,
       statusText: 'Failure'
     }
+  },
+  getWithOrderByAgeDescending: {
+    path: 'tests/get/users',
+    body: { order: { orderBy: ['age'], orderDirection: 'desc'}},
+    response: {
+      data: [
+        {
+          age: 33,
+          firstName: 'Mike',
+          id: 'J8NR45UzDffyMY0wBNoa',
+          lastName: 'Poe'
+        },
+        {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        },
+        {
+          age: 22,
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
+        },
+        {
+          age: 20,
+          firstName: 'May',
+          id: 'q5LpatgtZwj2U2OalZKR',
+          lastName: 'June'
+        }
+      ],
+      ok: true,
+      request: 'GET',
+      status: 200,
+      statusText: 'OK'
+    }
+  },
+  getWithOrderByAgeAscending: {
+    path: 'tests/get/users',
+    body: { order: { orderBy: ['age'] } },
+    response: {
+      data: [
+        {
+          age: 20,
+          firstName: 'May',
+          id: 'q5LpatgtZwj2U2OalZKR',
+          lastName: 'June'
+        },
+        {
+          age: 22,
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
+        },
+        {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        },
+        {
+          age: 33,
+          firstName: 'Mike',
+          id: 'J8NR45UzDffyMY0wBNoa',
+          lastName: 'Poe'
+        }
+      ],
+      ok: true,
+      request: 'GET',
+      status: 200,
+      statusText: 'OK'
+    }
   }
 };
