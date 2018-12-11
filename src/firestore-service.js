@@ -3,7 +3,6 @@ import url from 'url';
 import firebase from 'firebase';
 
 import { getPathAndElementId } from './Utils/collectionUtils';
-
 import { queryForID, queryForCollection } from './Utils/queryUtils';
 
 let firestore = null;
