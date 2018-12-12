@@ -206,7 +206,7 @@ export const getCollectionMock = {
   },
   getWithOrderByAgeDescending: {
     path: 'tests/get/users',
-    body: { order: { orderBy: ['age'], orderDirection: 'desc'}},
+    body: { orderBy: ['age'], orderDirection: 'desc' },
     response: {
       data: [
         {
@@ -242,7 +242,7 @@ export const getCollectionMock = {
   },
   getWithOrderByAgeAscending: {
     path: 'tests/get/users',
-    body: { order: { orderBy: ['age'] } },
+    body: { orderBy: ['age'] },
     response: {
       data: [
         {

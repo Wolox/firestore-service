@@ -12,15 +12,14 @@ export function queryForID(data, id) {
 
 export function queryForCollection(data, body) {
   let query = data;
-  const { limit, filters, order } = body;
+  const { limit, filters, orderBy, orderDirection } = body;
   if (filters) {
     query = applyFilters(query, filters);
   }
   if (limit) {
     query = query.limit(Number(limit));
   }
-  if(order) {
-    const {orderBy, orderDirection} = order;
+  if (orderBy) {
     query = pipeOrderBy(query, orderDirection || 'asc', orderBy);
   }
   return query.get().then(snapshot => snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
