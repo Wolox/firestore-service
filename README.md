@@ -102,6 +102,21 @@ Supported condition operators: `<`, `<=`, `>`, `>=`, `==` or  `array_contains`
 Note: If you want to combine `==` with any of the others you will have to create an index in your db. More info about this here:
 https://firebase.google.com/docs/firestore/query-data/indexing
 
+- Order By
+
+Allows for ordering the query result by database field and `ascending/descending` direction. The default `orderDirection` is `ascending`
+
+The following query will get `regions` ordered by `age` `ascending`
+```js
+const response = await firestoreService.get('regions', { orderBy: ['age'] });
+```
+
+The following query will get `regions` ordered by `age` `descending`
+```js
+const response = await firestoreService.get('regions', { orderBy: ['age'], orderDirection : 'desc' });
+```
+
+
 ### POST
 
 You can create an element by calling POST with the collection's path and the body with the element's data.
