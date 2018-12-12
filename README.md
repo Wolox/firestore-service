@@ -116,6 +116,12 @@ The following query will get `regions` ordered by `age` `descending`
 const response = await firestoreService.get('regions', { orderBy: ['age'], orderDirection : 'desc' });
 ```
 
+The following query will get `regions` ordered by `age` and `name` `ascending`
+```js
+const response = await firestoreService.get('regions', { orderBy: ['age', 'name'] });
+```
+Note: If you want to order your query by several fields you will have to create an index in your db,More info about this here:
+https://firebase.google.com/docs/firestore/query-data/indexing
 
 ### POST
 
