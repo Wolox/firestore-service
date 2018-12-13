@@ -10,7 +10,8 @@
     "test": "jest --forceExit --coverage --detectOpenHandles",
     "build": "webpack",
     "prepublishOnly": "npm run build",
-    "lint": "find ./src -name \\**.js | xargs ./node_modules/eslint/bin/eslint.js"
+    "lint": "find ./src -name \\**.js | xargs ./node_modules/eslint/bin/eslint.js",
+    "precommit": "npm test && npm run lint"
   },
   "repository": {
     "type": "git",
