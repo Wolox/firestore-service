@@ -28,8 +28,8 @@ export function queryForCollection(data, body) {
     query = query.limit(Number(limit));
   }
   if (orderBy) {
-    const orderByArr = typeof orderBy === "string" ? [orderBy] : orderBy;
-    const orderDirection = descending ? "desc" : "asc";
+    const orderByArr = Array.isArray(orderBy) ? orderBy : [ orderBy ];
+    const orderDirection = descending ? 'desc' : 'asc';
     query = pipeOrderBy(query, orderDirection, orderByArr);
   }
   return query
