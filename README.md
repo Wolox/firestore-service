@@ -26,7 +26,7 @@ Once you have your credentials and the package install you can start using fires
 You will need to initialize the service as soon as you can, the code should look something like this:
 
 ```js
-import firestoreService from "firestore-service";
+import firestoreService from 'firestore-service';
 
 const firebaseConfig = {
   apiKey: xxxxxxxxxxxx,
@@ -65,13 +65,13 @@ Note: The path will always be `collection/id/collection2/id2/...`. The "url" wil
 E.g.:
 
 ```js
-const response = await firestoreService.get("regions");
+const response = await firestoreService.get('regions');
 ```
 
 The response will have all the "regions"
 
 ```js
-const response = await firestoreService.get("regions/32");
+const response = await firestoreService.get('regions/32');
 ```
 
 The response will have the information about the region with id 32.
@@ -85,7 +85,7 @@ Firestore service allows you to use certain tools to manipulate your data in the
 The response will only have 20 "regions"
 
 ```js
-const response = await firestoreService.get("regions/32", { limit: 20 });
+const response = await firestoreService.get('regions/32', { limit: 20 });
 ```
 
 - Filter
@@ -93,10 +93,10 @@ const response = await firestoreService.get("regions/32", { limit: 20 });
 The response will only have users who are older than 22 years old and younger than 35
 
 ```js
-const response = await firestoreService.get("regions/32", {
+const response = await firestoreService.get('regions/32', {
   filters: [
-    { field: "age", condition: "<", value: 35 },
-    { field: "age", condition: ">", value: 22 }
+    { field: 'age', condition: '<', value: 35 },
+    { field: 'age', condition: '>', value: 22 }
   ]
 });
 ```
@@ -119,14 +119,14 @@ Allows for ordering the query result by database field and `ascending/descending
 The following query will get `regions` ordered by `age` `ascending`
 
 ```js
-const response = await firestoreService.get("regions", { orderBy: "age" });
+const response = await firestoreService.get('regions', { orderBy: 'age' });
 ```
 
 The following query will get `regions` ordered by `age` `descending`
 
 ```js
-const response = await firestoreService.get("regions", {
-  orderBy: "age",
+const response = await firestoreService.get('regions', {
+  orderBy: 'age',
   descending: true
 });
 ```
@@ -134,8 +134,8 @@ const response = await firestoreService.get("regions", {
 The following query will get `regions` ordered by `age` and `name` `ascending`
 
 ```js
-const response = await firestoreService.get("regions", {
-  orderBy: ["age", "name"]
+const response = await firestoreService.get('regions', {
+  orderBy: ['age', 'name']
 });
 ```
 
@@ -166,7 +166,7 @@ You can delete a certain element from a collection by using DELETE with a path t
 E.g.:
 
 ```js
-firestoreService.delete("regions/32/users/1");
+firestoreService.delete('regions/32/users/1');
 ```
 
 The user from the region with id 32 that has id 1 will be deleted. The response will be empty
@@ -179,10 +179,10 @@ E.g.:
 
 ```js
 const body = {
-  firstName: "New name2"
+  firstName: 'New name2'
 };
 
-firestoreService.patch("regions/32/users/1", body);
+firestoreService.patch('regions/32/users/1', body);
 ```
 
 The user with id 1 that belongs to the region with id 32 will have his name altered but will keep the previous values. The response will contain the updated user
@@ -196,21 +196,21 @@ E.g.:
 ```js
 const body = {
   id: 1,
-  firstName: "New name3",
-  lastName: "New last name3"
+  firstName: 'New name3',
+  lastName: 'New last name3'
 };
 
-firestoreService.patch("regions/32/users/1", body);
+firestoreService.patch('regions/32/users/1', body);
 ```
 
 The user with id 1 that belongs to the region with id 32 will be altered.The response will contain the edited user.
 
 ```js
 const body = {
-  firstName: "New name3"
+  firstName: 'New name3'
 };
 
-firestoreService.patch("regions/32/users/1", body);
+firestoreService.patch('regions/32/users/1', body);
 ```
 
 The user with id 1 that belongs to the region with id 32 will be altered and the `lastName` field will be set to null. The response will contain the edited user.
@@ -218,11 +218,11 @@ The user with id 1 that belongs to the region with id 32 will be altered and the
 ```js
 const body = {
   id: 2,
-  firstName: "New name3",
-  lastName: "New last name3"
+  firstName: 'New name3',
+  lastName: 'New last name3'
 };
 
-firestoreService.patch("regions/32/users/1", body);
+firestoreService.patch('regions/32/users/1', body);
 ```
 
 An error will be thrown because of id mismatch.
