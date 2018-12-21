@@ -132,5 +132,76 @@ export const getCollectionMock = {
       status: 400,
       statusText: 'Failure'
     }
+  },
+  getWithFilters: {
+    path: 'tests/get/users',
+    body: { filters: [
+      { field: 'age', condition: '<', value: 32 }
+    ] },
+    response: {
+      data: [
+        {
+          age: 20,
+          firstName: 'May',
+          id: 'q5LpatgtZwj2U2OalZKR',
+          lastName: 'June'
+        },
+        {
+          age: 22,
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
+        },
+        {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        }
+      ],
+      ok: true,
+      request: 'GET',
+      status: 200,
+      statusText: 'OK'
+    }
+  },
+  getWithMultipleFilters: {
+    path: 'tests/get/users',
+    body: { filters: [
+      { field: 'age', condition: '<', value: 32 },
+      { field: 'age', condition: '>', value: 21 }
+    ] },
+    response: {
+      data: [
+        {
+          age: 22,
+          firstName: 'Matt',
+          id: 'EFUsC6gMx052i39GFz8a',
+          lastName: 'Myers'
+        },
+        {
+          age: 25,
+          firstName: 'Kyle',
+          id: '7QhqXVN0bQ3Zd6cKP1br',
+          lastName: 'July'
+        }
+      ],
+      ok: true,
+      request: 'GET',
+      status: 200,
+      statusText: 'OK'
+    }
+  },
+  wrongFilter: {
+    path: 'tests/get/users',
+    body: { filters: [
+      { field: null, condition: undefined, value: 32 }
+    ] },
+    response: {
+      ok: false,
+      request: 'GET',
+      status: 400,
+      statusText: 'Failure'
+    }
   }
 };
