@@ -76,9 +76,9 @@ const response = await firestoreService.get('regions/32');
 
 The response will have the information about the region with id 32.
 
-#### Tools to make queries
+#### Extra query parameters
 
-Firestore service allows you to use certain tools to manipulate your data in the query. For this you should add a body into the request.
+Firestore service allows you to use certain tools to manipulate your data in the query. For this you should add extra parameters into the function get.
 
 - Limit
 
