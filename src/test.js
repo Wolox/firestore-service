@@ -47,6 +47,16 @@ test('TEST: GET WITH LIMIT 3 - Get only 3 elements from a collection', async () 
   expect(response).toEqual(getCollectionMock.getOnlyThree.response);
 });
 
+test('TEST: GET WITH ORDER BY DESCENDING - Get elements ordered by age, descending', async () => {
+  const response = await firestoreService.get(getCollectionMock.getWithOrderByAgeDescending.path, getCollectionMock.getWithOrderByAgeDescending.body);
+  expect(response).toEqual(getCollectionMock.getWithOrderByAgeDescending.response);
+});
+
+test('TEST: GET WITH ORDER BY DEFAULT ORDER DIRECTION - Get elements ordered by age, ascending by default', async () => {
+  const response = await firestoreService.get(getCollectionMock.getWithOrderByAgeAscending.path, getCollectionMock.getWithOrderByAgeAscending.body);
+  expect(response).toEqual(getCollectionMock.getWithOrderByAgeAscending.response);
+});
+
 test('TEST: FAILURE GET WITH LIMIT - Recieve a response with an error when the params are wrong', async () => {
   const response = await firestoreService.get(getCollectionMock.wrongLimit.path, getCollectionMock.wrongLimit.body);
   expect(response).toEqual(expect.objectContaining(getCollectionMock.wrongLimit.response));
