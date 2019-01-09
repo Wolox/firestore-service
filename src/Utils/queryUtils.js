@@ -28,7 +28,7 @@ export function queryForCollection(data, body) {
     query = query.limit(Number(limit));
   }
   if (orderBy) {
-    const orderByArr = Array.isArray(orderBy) ? orderBy : [ orderBy ];
+    const orderByArr = Array.isArray(orderBy) ? orderBy : [orderBy];
     const orderDirection = descending ? 'desc' : 'asc';
     query = pipeOrderBy(query, orderDirection, orderByArr);
   }

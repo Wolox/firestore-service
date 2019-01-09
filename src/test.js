@@ -4,6 +4,7 @@ import { getMock, getCollectionMock } from './Mock/getMock';
 import postMock from './Mock/postMock';
 import deleteMock from './Mock/deleteMock';
 import putMock from './Mock/putMock';
+import authMock from './Mock/authMock';
 import firestoreService from './firestore-service';
 
 require('dotenv').config();
@@ -139,4 +140,14 @@ test('TEST: FAILURE POST/PATCH - Recieve a response with an error when the param
     putMock.failure.newBody
   );
   expect(modifyResponse).toEqual(expect.objectContaining(putMock.failure.response));
+});
+
+test('TEST: SIGNUP FAILURE - Recieve a response with an error when the credentials are wrong', async () => {
+  const response = await firestoreService.signUp(authMock.signUp.email, authMock.signUp.password);
+  expect(response).toEqual(expect.objectContaining(authMock.signUp.response));
+});
+
+test('TEST: LOGIN FAILURE - Recieve a response with an error when the credentials are wrong', async () => {
+  const response = await firestoreService.login(authMock.login.email, authMock.login.password);
+  expect(response).toEqual(expect.objectContaining(authMock.login.response));
 });
