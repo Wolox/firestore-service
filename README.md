@@ -139,8 +139,7 @@ const response = await firestoreService.get('regions', {
 });
 ```
 
-Note: If you want to order your query by several fields you will have to create an index in your db,More info about this here:
-https://firebase.google.com/docs/firestore/query-data/indexing
+Note: If you want to order your query by several fields you will have to create an index in your db,More info about this [here](https://firebase.google.com/docs/firestore/query-data/indexing)
 
 ### POST
 
@@ -234,7 +233,7 @@ Firestore service also supports methods to authenticate users. These are not htt
 
 ### LOGIN
 
-You can login with an already created user (You can create them in the firebase console).
+You can login with an already created user (You can create them in the firebase [console](https://console.firebase.google.com/))
 
 ```js
 const email = 'email@example.com'
