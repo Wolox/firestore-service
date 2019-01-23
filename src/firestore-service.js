@@ -99,6 +99,16 @@ async function signUp(email, password) {
   }
 }
 
+async function updateProfile(body) {
+  try {
+    const user = firebase.auth().currentUser;
+    const data = await user.updateProfile(body);
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.SIGN_UP);
+  } catch (error) {
+    return generateResponse(false, error, CLIENT_ERROR_CODES.FORBIDDEN, STATUS.FAILURE, REQUEST.SIGN_UP);
+  }
+}
+
 const firestoreService = {
   initialize: keys => initializeFirestore(keys),
   get: (path, body) => getData(url.parse(path, true), body),
@@ -107,7 +117,8 @@ const firestoreService = {
   post: (path, body) => createDoc(url.parse(path, true), body),
   patch: (path, body) => modifyDoc(url.parse(path, true), body),
   login: (email, password) => login(email, password),
-  signUp: (email, password) => signUp(email, password)
+  signUp: (email, password) => signUp(email, password),
+  updateProfile: body => updateProfile(body)
 };
 
 export default firestoreService;
