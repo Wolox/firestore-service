@@ -139,8 +139,7 @@ const response = await firestoreService.get('regions', {
 });
 ```
 
-Note: If you want to order your query by several fields you will have to create an index in your db,More info about this here:
-https://firebase.google.com/docs/firestore/query-data/indexing
+Note: If you want to order your query by several fields you will have to create an index in your db,More info about this [here](https://firebase.google.com/docs/firestore/query-data/indexing)
 
 ### POST
 
@@ -200,7 +199,7 @@ const body = {
   lastName: 'New last name3'
 };
 
-firestoreService.patch('regions/32/users/1', body);
+firestoreService.put('regions/32/users/1', body);
 ```
 
 The user with id 1 that belongs to the region with id 32 will be altered.The response will contain the edited user.
@@ -210,7 +209,7 @@ const body = {
   firstName: 'New name3'
 };
 
-firestoreService.patch('regions/32/users/1', body);
+firestoreService.put('regions/32/users/1', body);
 ```
 
 The user with id 1 that belongs to the region with id 32 will be altered and the `lastName` field will be set to null. The response will contain the edited user.
@@ -226,6 +225,41 @@ firestoreService.patch('regions/32/users/1', body);
 ```
 
 An error will be thrown because of id mismatch.
+
+
+## Authentications
+
+Firestore service also supports methods to authenticate users. These are not http methods, are functions to be used with the same package.
+
+### LOGIN
+
+You can login with an already created user (You can create them in the firebase [console](https://console.firebase.google.com/))
+
+```js
+const email = 'email@example.com'
+const password = 'xxxxxx'
+
+
+const response = await firestoreService.login(email, password);
+```
+
+The response will have all the user info.
+
+### SIGN UP
+
+You can sign up a new user with the sign up method.
+
+```js
+const email = 'email@example.com'
+const password = 'xxxxxx'
+
+
+const response = await firestoreService.signUp(email, password);
+```
+
+If the response is succesful, the user will be created and all it's information will be in the response.
+
+
 
 ## Supported status codes
 

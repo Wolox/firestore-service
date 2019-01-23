@@ -1,0 +1,29 @@
+export const STATUS = {
+  OK: 'OK',
+  FAILURE: 'Failure'
+};
+
+export const SUCCESS_CODES = {
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204
+};
+
+export const CLIENT_ERROR_CODES = {
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409
+};
+
+export const REQUEST = {
+  INITIALIZE: 'INITIALIZE',
+  CREATE: 'CREATE',
+  GET: 'GET',
+  POST: 'POST',
+  DELETE: 'DELETE',
+  PUT: 'PUT',
+  LOGIN: 'LOGIN',
+  SIGN_UP: 'SIGN_UP'
+};

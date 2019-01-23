@@ -4,36 +4,10 @@ import firebase from 'firebase';
 
 import { getPathAndElementId } from './Utils/collectionUtils';
 import { queryForID, queryForCollection } from './Utils/queryUtils';
+import { STATUS, SUCCESS_CODES, CLIENT_ERROR_CODES, REQUEST } from './constants';
 
 let firestore = null;
-
-const STATUS = {
-  OK: 'OK',
-  FAILURE: 'Failure'
-};
-
-const SUCCESS_CODES = {
-  OK: 200,
-  CREATED: 201,
-  NO_CONTENT: 204
-};
-
-const CLIENT_ERROR_CODES = {
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  FORBIDDEN: 403,
-  NOT_FOUND: 404,
-  CONFLICT: 409
-};
-
-const REQUEST = {
-  INITIALIZE: 'INITIALIZE',
-  CREATE: 'CREATE',
-  GET: 'GET',
-  POST: 'POST',
-  DELETE: 'DELETE',
-  PUT: 'PUT'
-};
+let userAdmin = null;
 
 // eslint-disable-next-line max-params
 const generateResponse = (ok, data, status, statusText, request) => ({
@@ -47,6 +21,7 @@ const generateResponse = (ok, data, status, statusText, request) => ({
 function initializeFirestore(keys) {
   try {
     firestore = firebase.initializeApp(keys).firestore();
+    userAdmin = firebase.initializeApp(keys, 'userAdmin');
     firestore.settings({ timestampsInSnapshots: true });
     return generateResponse(true, firestore, SUCCESS_CODES.OK, STATUS.OK, REQUEST.INITIALIZE);
   } catch (error) {
@@ -104,13 +79,35 @@ async function deleteDoc({ pathname }) {
   }
 }
 
+async function login(email, password) {
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password);
+    const data = await firebase.auth().currentUser;
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.LOGIN);
+  } catch (error) {
+    return generateResponse(false, error, CLIENT_ERROR_CODES.UNAUTHORIZED, STATUS.FAILURE, REQUEST.LOGIN);
+  }
+}
+
+async function signUp(email, password) {
+  try {
+    await userAdmin.auth().createUserWithEmailAndPassword(email, password);
+    const data = await userAdmin.auth().currentUser;
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.SIGN_UP);
+  } catch (error) {
+    return generateResponse(false, error, CLIENT_ERROR_CODES.FORBIDDEN, STATUS.FAILURE, REQUEST.SIGN_UP);
+  }
+}
+
 const firestoreService = {
   initialize: keys => initializeFirestore(keys),
   get: (path, body) => getData(url.parse(path, true), body),
   put: (path, body) => modifyDoc(url.parse(path, true), body),
   delete: path => deleteDoc(url.parse(path, true)),
   post: (path, body) => createDoc(url.parse(path, true), body),
-  patch: (path, body) => modifyDoc(url.parse(path, true), body)
+  patch: (path, body) => modifyDoc(url.parse(path, true), body),
+  login: (email, password) => login(email, password),
+  signUp: (email, password) => signUp(email, password)
 };
 
 export default firestoreService;
