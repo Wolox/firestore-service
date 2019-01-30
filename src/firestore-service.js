@@ -103,9 +103,9 @@ async function updateProfile(body) {
   try {
     const user = firebase.auth().currentUser;
     const data = await user.updateProfile(body);
-    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.SIGN_UP);
+    return generateResponse(true, data, SUCCESS_CODES.OK, STATUS.OK, REQUEST.UPDATE_PROFILE);
   } catch (error) {
-    return generateResponse(false, error, CLIENT_ERROR_CODES.FORBIDDEN, STATUS.FAILURE, REQUEST.SIGN_UP);
+    return generateResponse(false, error, CLIENT_ERROR_CODES.FORBIDDEN, STATUS.FAILURE, REQUEST.UPDATE_PROFILE);
   }
 }
 
