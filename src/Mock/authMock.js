@@ -30,5 +30,23 @@ export default {
       status: 403,
       statusText: 'Failure'
     }
+  },
+  update: {
+    body: {
+      name: 'newName',
+      surname: 'newSurname'
+    },
+    response: {
+      ok: true,
+      request: 'UPDATE_PROFILE',
+      status: 200,
+      statusText: 'OK'
+    },
+    failureResponse: {
+      ok: false,
+      request: 'UPDATE_PROFILE',
+      status: 400,
+      statusText: 'Failure'
+    }
   }
 };

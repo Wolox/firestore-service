@@ -156,3 +156,16 @@ test('TEST: LOGIN FAILURE - Recieve a response with an error when the credential
   const response = await firestoreService.login(authMock.login.failure.email, authMock.login.failure.password);
   expect(response).toEqual(expect.objectContaining(authMock.login.failure.response));
 });
+
+test('TEST: UPDATE PROFILE - Recieve a response with an error when the credentials are wrong', async () => {
+  await firestoreService.login(authMock.login.success.email, authMock.login.success.password);
+  const response = await firestoreService.updateProfile(authMock.update.body);
+  expect(response).toEqual(expect.objectContaining(authMock.update.response));
+});
+
+test('TEST: UPDATE PROFILE - Recieve a response with an error when the credentials are wrong', async () => {
+  await firestoreService.login(authMock.login.success.email, authMock.login.success.password);
+  const response = await firestoreService.updateProfile();
+  expect(response).toEqual(expect.objectContaining(authMock.update.failureResponse));
+});
+
