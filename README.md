@@ -259,7 +259,21 @@ const response = await firestoreService.signUp(email, password);
 
 If the response is succesful, the user will be created and all it's information will be in the response.
 
+### UPDATE PROFILE
 
+You can update a user's profile with the following method.
+
+```js
+const body = { name: 'example name', phone: 'example phone'}
+const password = 'xxxxxx'
+
+
+const response = await firestoreService.updateProfile(body);
+```
+
+If the response is succesful, the user will be updated.
+
+Note: The user should be logged in to perform the update
 
 ## Supported status codes
 

@@ -25,5 +25,6 @@ export const REQUEST = {
   DELETE: 'DELETE',
   PUT: 'PUT',
   LOGIN: 'LOGIN',
-  SIGN_UP: 'SIGN_UP'
+  SIGN_UP: 'SIGN_UP',
+  UPDATE_PROFILE: 'UPDATE_PROFILE'
 };
