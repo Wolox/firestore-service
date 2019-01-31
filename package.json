@@ -11,7 +11,7 @@
     "build": "webpack",
     "prepublishOnly": "npm run build",
     "lint": "find ./src -name \\**.js | xargs ./node_modules/eslint/bin/eslint.js",
-    "precommit": "npm test && npm run lint"
+    "precommit": "npm run lint"
   },
   "repository": {
     "type": "git",
