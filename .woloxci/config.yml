@@ -1,0 +1,24 @@
+config:
+  dockerfile: .woloxci/Dockerfile
+  project_name: firestore-service
+
+steps:
+  copy_node_modules:
+    - cp -r $NODE_PATH/ ./
+  lint:
+    - cd /install
+    - npm run precommit
+
+deploy:
+  copy_node_modules:
+    - cp -r $NODE_PATH/ ./
+  s3_push:
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - gulp s3 --env stage
+
+environment:
+  GIT_COMMITTER_NAME: a
+  GIT_COMMITTER_EMAIL: b
+  LANG: C.UTF-8
+
