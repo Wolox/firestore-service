@@ -108,7 +108,7 @@ Supported condition operators:
 - `>`
 - `>=`
 - `==`
-- `array_contains`
+- `array-contains`
 
 Note: If you want to combine `==` with any of the others you will have to create an index in your db. More info about this [here](https://firebase.google.com/docs/firestore/query-data/indexing)
 
