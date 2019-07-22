@@ -265,7 +265,6 @@ You can update a user's profile with the following method.
 
 ```js
 const body = { name: 'example name', phone: 'example phone'}
-const password = 'xxxxxx'
 
 
 const response = await firestoreService.updateProfile(body);
